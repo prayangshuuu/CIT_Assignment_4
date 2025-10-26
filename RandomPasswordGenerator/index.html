@@ -14,8 +14,8 @@
             <span class="logo" aria-hidden="true"></span>
             <span>Random Password Generator</span>
         </div>
-        <div class="theme-select">
-            <button id="themeToggle" class="toggle" type="button" aria-label="Toggle theme" data-mode="light">
+        <div class="theme-select" data-mode="light">
+            <button id="themeToggle" class="toggle" type="button" aria-label="Toggle theme">
                 <span class="knob"></span>
             </button>
         </div>
@@ -35,14 +35,53 @@
             </div>
 
             <div class="options mt-1">
-                <label class="check"><input type="checkbox" id="lower" checked /><span class="box">✓</span><span class="text">Lowercase (a–z)</span></label>
-                <label class="check"><input type="checkbox" id="upper" checked /><span class="box">✓</span><span class="text">Uppercase (A–Z)</span></label>
-                <label class="check"><input type="checkbox" id="digits" checked /><span class="box">✓</span><span class="text">Numbers (0–9)</span></label>
-                <label class="check"><input type="checkbox" id="symbols" checked /><span class="box">✓</span><span class="text">Symbols (!@#$…)</span></label>
-                <label class="check"><input type="checkbox" id="noSimilar" /><span class="box">✓</span><span class="text">Exclude similar (i, l, 1, L, o, 0, O)</span></label>
-                <label class="check"><input type="checkbox" id="noAmbig" /><span class="box">✓</span><span class="text">Exclude ambiguous ({}[]()/\'"`~,;:.<>)</span></label>
-                <label class="check"><input type="checkbox" id="noRepeat" /><span class="box">✓</span><span class="text">Disallow repeated characters</span></label>
-                <label class="check"><input type="checkbox" id="requireEach" checked /><span class="box">✓</span><span class="text">Require at least one of each selected set</span></label>
+                <label class="check">
+                    <input type="checkbox" id="lower" checked />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Lowercase (a–z)</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="upper" checked />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Uppercase (A–Z)</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="digits" checked />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Numbers (0–9)</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="symbols" checked />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Symbols (!@#$…)</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="noSimilar" />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Exclude similar (i, l, 1, L, o, 0, O)</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="noAmbig" />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Exclude ambiguous ({}[]()/\'"`~,;:.&lt;&gt;)</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="noRepeat" />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Disallow repeated characters</span>
+                </label>
+
+                <label class="check">
+                    <input type="checkbox" id="requireEach" checked />
+                    <span class="box" aria-hidden="true"></span>
+                    <span class="text">Require at least one of each selected set</span>
+                </label>
             </div>
 
             <div class="actions">
@@ -80,11 +119,8 @@
             </div>
         </aside>
     </main>
-
-    <footer class="footer">Tip: Longer + more character sets = stronger passwords. Avoid reusing passwords—use a manager.</footer>
 </div>
 
 <script src="scripts.js" defer></script>
 </body>
 </html>
-
