@@ -1,0 +1,90 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="wrap">
+    <header class="header">
+        <div class="brand">
+            <span class="logo" aria-hidden="true"></span>
+            <span>Random Password Generator</span>
+        </div>
+        <div class="theme-select">
+            <button id="themeToggle" class="toggle" type="button" aria-label="Toggle theme" data-mode="light">
+                <span class="knob"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main" id="app">
+        <section class="card">
+            <h1>Random Password Generator</h1>
+            <p class="mini">Create strong, unique passwords with entropy insights and one-click copy.</p>
+
+            <div class="field mt-1">
+                <label for="length">Length: <strong><span id="lengthVal">16</span></strong></label>
+                <div class="row">
+                    <input id="length" type="range" min="6" max="64" value="16" step="1" aria-label="Password length" />
+                    <input id="lengthNum" type="number" min="6" max="64" value="16" class="input" aria-label="Password length number" />
+                </div>
+            </div>
+
+            <div class="options mt-1">
+                <label class="check"><input type="checkbox" id="lower" checked /><span class="box">✓</span><span class="text">Lowercase (a–z)</span></label>
+                <label class="check"><input type="checkbox" id="upper" checked /><span class="box">✓</span><span class="text">Uppercase (A–Z)</span></label>
+                <label class="check"><input type="checkbox" id="digits" checked /><span class="box">✓</span><span class="text">Numbers (0–9)</span></label>
+                <label class="check"><input type="checkbox" id="symbols" checked /><span class="box">✓</span><span class="text">Symbols (!@#$…)</span></label>
+                <label class="check"><input type="checkbox" id="noSimilar" /><span class="box">✓</span><span class="text">Exclude similar (i, l, 1, L, o, 0, O)</span></label>
+                <label class="check"><input type="checkbox" id="noAmbig" /><span class="box">✓</span><span class="text">Exclude ambiguous ({}[]()/\'"`~,;:.<>)</span></label>
+                <label class="check"><input type="checkbox" id="noRepeat" /><span class="box">✓</span><span class="text">Disallow repeated characters</span></label>
+                <label class="check"><input type="checkbox" id="requireEach" checked /><span class="box">✓</span><span class="text">Require at least one of each selected set</span></label>
+            </div>
+
+            <div class="actions">
+                <button id="generate" class="btn primary" type="button">Generate</button>
+                <button id="copy" class="btn ghost" type="button">Copy</button>
+                <button id="save" class="btn ghost" type="button">Save to history</button>
+                <button id="clearHistory" class="btn ghost" type="button">Clear history</button>
+            </div>
+        </section>
+
+        <aside class="card results">
+            <h2>Your Password</h2>
+            <div class="output">
+                <div class="password-display" aria-live="polite">
+                    <div id="password" class="password-text" title="Generated password">—</div>
+                    <div class="copy-wrap">
+                        <button id="regen" class="btn ghost" type="button" title="Regenerate">↻</button>
+                        <button id="copy2" class="btn primary" type="button" title="Copy">Copy</button>
+                    </div>
+                </div>
+
+                <div class="kpis">
+                    <span id="strengthLabel" class="pill">Strength: —</span>
+                    <span id="entropyLabel" class="pill">Entropy: —</span>
+                    <span id="charsetLabel" class="pill">Charset: —</span>
+                </div>
+
+                <div class="meter" aria-hidden="true"><div id="bar" class="bar"></div></div>
+                <p class="mini" id="hint">Choose options to see strength and entropy.</p>
+
+                <div class="panel mt-1">
+                    <strong>History</strong>
+                    <div id="history" class="history" aria-label="Saved passwords history"></div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="footer">Tip: Longer + more character sets = stronger passwords. Avoid reusing passwords—use a manager.</footer>
+</div>
+
+<script src="scripts.js" defer></script>
+</body>
+</html>
+
