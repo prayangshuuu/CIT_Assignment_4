@@ -1,0 +1,567 @@
+/*
+---
+Name: BMI Calculator Styles
+Desc: Modern, SaaS-style theme with light/dark modes.
+---
+*/
+
+/* 1. Root & Theming
+----------------------------------------------- */
+:root {
+    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* Default to light theme */
+    --bg: #ffffff;
+    --fg: #1f2937;
+    --card-bg: #f9fafb;
+    --card-fg: #111827;
+    --border: #d1d5db;
+    --border-focus: #3b82f6;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    --primary: #4f46e5;
+    --primary-fg: #ffffff;
+    --primary-hover: #4338ca;
+
+    --ghost-fg: #374151;
+    --ghost-hover-bg: #f3f4f6;
+
+    --error-bg: #fef2f2;
+    --error-fg: #991b1b;
+    --error-border: #fca5a5;
+
+    --pill-bg: #e0e7ff;
+    --pill-fg: #3730a3;
+
+    --meter-bg: #e5e7eb;
+    --meter-bar: linear-gradient(90deg, #4f46e5 0%, #a855f7 100%);
+}
+
+[data-theme="dark"] {
+    --bg: #111827;
+    --fg: #d1d5db;
+    --card-bg: #1f2937;
+    --card-fg: #f9fafb;
+    --border: #4b5563;
+    --border-focus: #60a5fa;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+
+    --primary: #6366f1;
+    --primary-fg: #ffffff;
+    --primary-hover: #818cf8;
+
+    --ghost-fg: #d1d5db;
+    --ghost-hover-bg: #374151;
+
+    --error-bg: #450a0a;
+    --error-fg: #fca5a5;
+    --error-border: #7f1d1d;
+
+    --pill-bg: #3730a3;
+    --pill-fg: #e0e7ff;
+
+    --meter-bg: #374151;
+}
+
+/* 2. Global Resets & Body
+----------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    color-scheme: light dark;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    transition: background-color 0.3s var(--ease-out-quad), color 0.3s var(--ease-out-quad);
+    perspective: 1000px; /* For parallax effect */
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--card-fg);
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    color: inherit;
+}
+
+/* 3. Layout Utilities
+----------------------------------------------- */
+.wrap {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+.row {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.row > * {
+    flex: 1;
+}
+
+.muted {
+    font-size: 0.9rem;
+    color: var(--fg);
+    opacity: 0.7;
+}
+
+/* 4. Header & Theme Toggle
+----------------------------------------------- */
+.header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Simple CSS-only logo */
+.logo {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background-color: var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+.logo::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: rotate(25deg) translate(-10px, -10px);
+}
+
+.theme-select {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.theme-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 4rem; /* Keep width consistent */
+}
+
+/* Theme Toggle Button */
+.toggle {
+    --knob-size: 1.5rem;
+    --track-w: 3.5rem;
+    --track-h: 1.75rem;
+
+    appearance: none;
+    border: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    width: var(--track-w);
+    height: var(--track-h);
+    border-radius: 99px;
+    cursor: pointer;
+    padding: 0.25rem;
+    position: relative;
+    overflow: hidden; /* For ripple */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.toggle:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+.toggle-knob {
+    display: block;
+    width: var(--knob-size);
+    height: var(--knob-size);
+    border-radius: 50%;
+    background: var(--primary);
+    position: relative;
+    display: grid;
+    place-items: center;
+    transform: translateX(0);
+    transition: transform 0.3s var(--ease-in-out-cubic);
+}
+
+/* Ripple Effect (uses JS --x, --y) */
+.toggle::after {
+    content: "";
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+.toggle:active::after {
+    width: 200px;
+    height: 200px;
+}
+
+/* Sun/Moon Icons */
+.icon-sun, .icon-moon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--primary-fg);
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.icon-sun::before { content: '☀️'; }
+.icon-moon::before { content: '🌙'; }
+
+/* Toggle States */
+[data-mode="system"] .toggle-knob { transform: translateX(calc( (var(--track-w) - var(--knob-size)) / 2 - 0.25rem )); }
+[data-mode="dark"] .toggle-knob { transform: translateX(calc( var(--track-w) - var(--knob-size) - 0.5rem )); }
+
+[data-mode="system"] .icon-sun,
+[data-theme="light"] [data-mode="system"] .icon-sun,
+[data-theme="light"] [data-mode="light"] .icon-sun {
+    opacity: 1; transform: scale(1);
+}
+
+[data-mode="system"] .icon-moon,
+[data-theme="dark"] [data-mode="system"] .icon-moon,
+[data-theme="dark"] [data-mode="dark"] .icon-moon {
+    opacity: 1; transform: scale(1);
+}
+
+/* Hide the inactive icon */
+[data-theme="dark"] [data-mode="system"] .icon-sun,
+[data-theme="light"] [data-mode="system"] .icon-moon {
+    opacity: 0;
+}
+
+/* 5. Main Content & Cards
+----------------------------------------------- */
+.main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.card {
+    background: var(--card-bg);
+    color: var(--card-fg);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.1s linear;
+    /* Use the JS parallax variables */
+    transform: rotateX(var(--tiltX, 0)) rotateY(var(--tiltY, 0));
+}
+
+.card.results {
+    /* Sticky position for desktop */
+    position: sticky;
+    top: 2rem;
+}
+
+/* 6. Form Elements
+----------------------------------------------- */
+.form .actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.field label:not(.radio) {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input[type="number"]:focus-visible,
+select:focus-visible {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-focus) 30%, transparent);
+}
+/* Hide number input spinners */
+input[type="number"] { -moz-appearance: textfield; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Custom Radio Button */
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--bg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.radio:hover {
+    border-color: var(--border-focus);
+}
+.radio input {
+    /* Hide the real radio button */
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+.radio span {
+    position: relative;
+    padding-left: 1.75rem; /* Space for custom radio */
+}
+/* Custom radio circle */
+.radio span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    transition: border-color 0.2s ease;
+}
+/* Custom radio inner dot */
+.radio span::after {
+    content: '';
+    position: absolute;
+    left: 6px; /* (1.25rem - 0.5rem) / 2 + 1px border */
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--primary);
+    transition: transform 0.2s var(--ease-out-quad);
+}
+/* Checked state */
+.radio input:checked + span::before {
+    border-color: var(--primary);
+}
+.radio input:checked + span::after {
+    transform: translateY(-50%) scale(1);
+}
+.radio input:focus-visible + span::before {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+/* 7. Buttons
+----------------------------------------------- */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+.btn:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Primary Button */
+.btn:not(.ghost) {
+    background: var(--primary);
+    color: var(--primary-fg);
+    box-shadow: var(--shadow);
+}
+.btn:not(.ghost):hover {
+    background: var(--primary-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Ghost Button */
+.btn.ghost {
+    background: transparent;
+    color: var(--ghost-fg);
+    box-shadow: 0 0 0 1px var(--border) inset;
+}
+.btn.ghost:hover {
+    background: var(--ghost-hover-bg);
+}
+
+/* 8. Alert
+----------------------------------------------- */
+.alert {
+    display: none; /* Hidden by default */
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    background: var(--error-bg);
+    color: var(--error-fg);
+    border: 1px solid var(--error-border);
+}
+
+/* 9. Results
+----------------------------------------------- */
+.results-body[hidden] {
+    display: none;
+}
+.results-body {
+    animation: fadeIn 0.5s var(--ease-out-quad);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.kpis {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.pill {
+    background: var(--pill-bg);
+    color: var(--pill-fg);
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.meter {
+    width: 100%;
+    height: 0.75rem;
+    background: var(--meter-bg);
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 1.5rem 0 0.5rem;
+}
+.bar {
+    height: 100%;
+    width: 0%; /* JS controls this */
+    background: var(--meter-bar);
+    border-radius: 99px;
+    transition: width 0.8s var(--ease-in-out-cubic);
+}
+
+.panel {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg); /* Slightly different from card-bg */
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+}
+.panel strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--card-fg);
+}
+
+/* 10. Footer
+----------------------------------------------- */
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    color: var(--fg);
+    opacity: 0.7;
+}
+
+/* 11. Responsive Design
+----------------------------------------------- */
+@media (min-width: 768px) {
+    .main {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    /* Make age/gender span full width */
+    .grid .field:nth-child(1),
+    .grid .field:nth-child(2) {
+        grid-column: 1 / -1;
+    }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!-- Header -->
+<header class="wrap header">
+    <h1 class="brand">
+        <span class="logo" aria-hidden="true"></span>
+        BMI Calculator
+    </h1>
+    <div class="header-actions">
+        <div class="theme-select">
+            <button id="themeBtn" class="toggle" aria-label="Toggle theme" data-mode="system">
+            <span class="toggle-knob">
+              <span class="icon-sun" aria-hidden="true"></span>
+              <span class="icon-moon" aria-hidden="true"></span>
+            </span>
+            </button>
+            <span class="theme-label" id="themeLabel">System</span>
+        </div>
+    </div>
+</header>
+
+<!-- Main -->
+<main class="wrap main">
+    <section class="card form">
+        <h2>Enter your details</h2>
+
+        <div id="alert" class="alert" role="alert" aria-live="polite"></div>
+
+        <form id="bmiForm" novalidate>
+            <div class="grid">
+                <div class="field">
+                    <label for="age">Age (2–120)</label>
+                    <input id="age" name="age" type="number" min="2" max="120" placeholder="28" required />
+                </div>
+
+                <div class="field">
+                    <label>Gender</label>
+                    <div class="row">
+                        <label class="radio">
+                            <input type="radio" name="gender" value="male" checked />
+                            <span>Male</span>
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="gender" value="female" />
+                            <span>Female</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="heightFt">Height</label>
+                    <div class="row">
+                        <input id="heightFt" name="heightFt" type="number" min="0" placeholder="Feet" required />
+                        <input id="heightIn" name="heightIn" type="number" min="0" placeholder="Inches" required />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="weight">Weight</label>
+                    <div class="row">
+                        <input id="weight" name="weight" type="number" min="0" step="0.1" placeholder="70" required />
+                        <select id="unit" name="unit" aria-label="Weight unit">
+                            <option value="kg" selected>kg</option>
+                            <option value="lb">lb</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn" id="calcBtn" type="submit">Calculate</button>
+                <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="card results" aria-live="polite">
+        <h2>Your results</h2>
+
+        <div id="results" class="results-body" hidden>
+            <div class="kpis">
+                <div class="pill" id="bmiPill">BMI: —</div>
+                <div class="pill" id="classPill">Category: —</div>
+                <div class="pill" id="bfpPill">Est. Body Fat: —</div>
+            </div>
+
+            <div class="meter">
+                <div id="meterBar" class="bar"></div>
+            </div>
+            <p class="muted" id="rangeText">Healthy BMI range: 18.5–24.9</p>
+
+            <div class="panel">
+                <strong>Interpretation</strong>
+                <p id="interpretation">Fill the form and click “Calculate”.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="wrap footer">
+    © 2025 <a href="https://github.com/prayangshuuu" target="_blank" rel="noopener noreferrer">prayangshuuu</a>
+</footer>
+
+<script src="scripts.js" defer></script>
+</body>
+</html>
