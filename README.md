@@ -1,7 +1,5 @@
 # CIT_Assignment_4
 
-Two small, polished web apps built with **HTML, CSS, and JavaScript**:
-
 1) **BMI Calculator** — calculates Body Mass Index with friendly guidance, theme toggle, and accessibility.
 2) **Random Password Generator** — builds strong passwords with live entropy (strength) feedback and a handy history.
 ---
